@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu | Foodie Express</title>
+    <style>
+        /* Global & Nav */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #f4f4f4; color: #333; }
+        header { background: #d35400; padding: 1rem; position: sticky; top: 0; z-index: 1000; }
+        nav ul { display: flex; justify-content: center; list-style: none; gap: 25px; }
+        nav ul li a { color: white; text-decoration: none; font-weight: bold; }
+        nav ul li a:hover { color: #f1c40f; }
+
+        /* Menu Specific Styles */
+        .menu-header { text-align: center; padding: 40px 20px; background: white; }
+        .menu-header h1 { color: #d35400; font-size: 2.5rem; }
+
+        .menu-grid {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .food-card:hover { transform: translateY(-5px); }
+
+        .food-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .food-info { padding: 20px; flex-grow: 1; text-align: center; }
+        .food-info h3 { margin-bottom: 10px; color: #2c3e50; }
+        .food-info p { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
+        
+        .price-tag {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #27ae60;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .add-btn {
+            background: #d35400;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        .add-btn:hover { background: #e67e22; }
+
+        footer { background: #2c3e50; color: white; text-align: center; padding: 20px 0; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="menu-header">
+        <h1>Explore Our Menu</h1>
+        <p>Fresh ingredients, bold flavors, delivered fast.</p>
+    </section>
+
+    <main class="menu-grid">
+        <!-- Item 1 -->
+        <div class="food-card">
+            <img src="https://images.unsplash.com" alt="Cheeseburger">
+            <div class="food-info">
+                <h3>Classic Cheeseburger</h3>
+                <p>Juicy beef patty with melted cheddar, lettuce, and our secret sauce.</p>
+                <span class="price-tag">Tsh. 1200</span>
+                <button class="add-btn" onclick="location.href='cart.html'">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="food-card">
+            <img src="https://images.unsplash.com" alt="Pizza">
+            <div class="food-info">
+                <h3>Pepperoni Feast</h3>
+                <p>Hand-tossed dough topped with spicy pepperoni and mozzarella.</p>
+                <span class="price-tag">Tsh. 1500</span>
+                <button class="add-btn" onclick="location.href='cart.html'">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="food-card">
+            <img src="https://images.unsplash.com" alt="Salad">
+            <div class="food-info">
+                <h3>Garden Fresh Salad</h3>
+                <p>Organic greens, cherry tomatoes, and balsamic vinaigrette.</p>
+                <span class="price-tag">Tsh. 9500</span>
+                <button class="add-btn" onclick="location.href='cart.html'">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="food-card">
+            <img src="https://images.unsplash.com" alt="Pasta">
+            <div class="food-info">
+                <h3>Creamy Fettuccine</h3>
+                <p>Rich alfredo sauce with parmesan and fresh parsley.</p>
+                <span class="price-tag">Tsh. 1400</span>
+                <button class="add-btn" onclick="location.href='cart.html'">Add to Cart</button>
+                
+
+            </div>
+        </div>
+        </div>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2026 @epolcafteria ll Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

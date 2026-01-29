@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | EPOL CAFTETIA</title>
+    <style>
+        /* Global & Nav Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #fdfdfd; color: #333; }
+        header { background: #d35400; padding: 1rem; position: sticky; top: 0; z-index: 1000; }
+        nav ul { display: flex; justify-content: center; list-style: none; gap: 25px; }
+        nav ul li a { color: white; text-decoration: none; font-weight: bold; }
+        nav ul li a:hover { color: #f1c40f; }
+
+        /* Cart Page Styles */
+        .cart-wrapper {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1 { color: #d35400; margin-bottom: 30px; text-align: center; }
+
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .cart-table th {
+            background-color: #eee;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .cart-table td {
+            padding: 20px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .item-info { display: flex; align-items: center; gap: 15px; }
+        .item-info img { width: 60px; height: 60px; border-radius: 5px; object-fit: cover; }
+
+        /* Quantity Controls */
+        .qty-input {
+            width: 50px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .remove-btn {
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 0.9rem;
+            background: none;
+            border: none;
+            text-decoration: underline;
+        }
+
+        /* Cart Totals */
+        .cart-total-section {
+            margin-top: 30px;
+            text-align: right;
+        }
+
+        .cart-total-section p { font-size: 1.2rem; margin-bottom: 10px; }
+        .grand-total { font-size: 1.8rem; font-weight: bold; color: #27ae60; }
+
+        .checkout-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-continue { border: 2px solid #d35400; color: #d35400; }
+        .btn-continue:hover { background: #d35400; color: white; }
+
+        .btn-checkout { background: #d35400; color: white; border: none; font-size: 1.1rem; }
+        .btn-checkout:hover { background: #e67e22; }
+
+        footer { background: #2c3e50; color: white; text-align: center; padding: 20px 0; margin-top: 60px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="cart-wrapper">
+        <h1>Your Shopping Cart</h1>
+
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="item-info">
+                            <img src="https://images.unsplash.com" alt="Burger">
+                            <div>
+                                <strong>Classic Cheeseburger</strong><br>
+                                <button class="remove-btn">Remove</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Tsh. 1200</td>
+                    <td><input type="number" value="1" class="qty-input"></td>
+                    <td>Tsh. 1200</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item-info">
+                            <img src="https://images.unsplash.com" alt="Pizza">
+                            <div>
+                                <strong>Pepperoni Pizza</strong><br>
+                                <button class="remove-btn">Remove</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Tsh. 1500</td>
+                    <td><input type="number" value="1" class="qty-input"></td>
+                    <td>Tsh. 1500</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="cart-total-section">
+            <p>Tax: Tsh. 2500</p>
+            <p class="grand-total">Total: Tsh. 29500</p>
+        </div>
+
+        <div class="checkout-actions">
+            <a href="menu.html" class="btn btn-continue">← Continue Shopping</a>
+            <a href="order.html" class="btn btn-checkout">Proceed to Checkout</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Foodie Express. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
+
