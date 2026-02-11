@@ -3,50 +3,50 @@
 =============================== */
 const AuthManager = {
   checkAuth() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const path = window.location.pathname;
     let page = path.split("/").pop().split("?")[0];
 
     // Handle root path or empty segment (e.g. localhost/EPOL-CAFTERIA/)
     if (page === "") page = "index.html";
 
-    const publicPages = ['login.html', 'register.html'];
+    const publicPages = ["login.html", "register.html"];
 
     // 1. If NOT logged in and trying to access a protected page -> Go to Login
     if (!isLoggedIn && !publicPages.includes(page)) {
-      window.location.href = 'login.html';
+      window.location.href = "login.html";
     }
 
     // 2. If Logged in and trying to access Login/Register -> Go to Dashboard
     if (isLoggedIn && publicPages.includes(page)) {
-      window.location.href = 'index.html';
+      window.location.href = "index.html";
     }
   },
 
   login() {
-    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem("isLoggedIn", "true");
   },
 
   logout() {
-    localStorage.removeItem('isLoggedIn');
-    window.location.href = 'login.html';
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html";
   },
 
   updateNavigation() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const loginLinks = document.querySelectorAll('a[href="login.html"]');
-    
-    loginLinks.forEach(link => {
+
+    loginLinks.forEach((link) => {
       if (isLoggedIn) {
         link.textContent = "Logout";
         link.href = "#";
-        link.addEventListener('click', (e) => {
+        link.addEventListener("click", (e) => {
           e.preventDefault();
           this.logout();
         });
       }
     });
-  }
+  },
 };
 
 // Run Auth Check immediately
@@ -65,8 +65,8 @@ const CartManager = {
 
   bindEvents() {
     // Handle "Add to Cart" buttons using Event Delegation (for dynamic items)
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('js-add-to-cart')) {
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("js-add-to-cart")) {
         const btn = e.target;
         const id = btn.dataset.id;
         const product = btn.dataset.product;
@@ -76,18 +76,18 @@ const CartManager = {
     });
 
     // Handle "Clear Cart" button
-    const clearBtn = document.getElementById('clearCartBtn');
+    const clearBtn = document.getElementById("clearCartBtn");
     if (clearBtn) {
-      clearBtn.addEventListener('click', () => {
+      clearBtn.addEventListener("click", () => {
         this.clear();
       });
     }
 
     // Handle "Remove Item" from cart using delegation
-    const cartItemsEl = document.getElementById('cartItems');
+    const cartItemsEl = document.getElementById("cartItems");
     if (cartItemsEl) {
-      cartItemsEl.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-remove')) {
+      cartItemsEl.addEventListener("click", (e) => {
+        if (e.target.classList.contains("btn-remove")) {
           const index = e.target.dataset.index;
           this.removeItem(parseInt(index));
         }
@@ -105,7 +105,7 @@ const CartManager = {
     this.items.push(item);
     this.save();
     this.updateCartCount();
-    
+
     alert(`${name} added to cart!`);
   },
 
@@ -118,7 +118,7 @@ const CartManager = {
     const list = document.getElementById("cartItems");
     const totalContainer = document.getElementById("cartTotalContainer");
     const totalDisplay = document.getElementById("cartTotalDisplay");
-    
+
     if (!list) return;
 
     list.innerHTML = "";
@@ -135,16 +135,16 @@ const CartManager = {
     this.items.forEach((item, index) => {
       const li = document.createElement("li");
       li.className = "cart-item";
-      
+
       let name = item;
       let price = 0;
 
       // Handle both old string items and new object items
-      if (typeof item === 'object') {
+      if (typeof item === "object") {
         name = item.name;
         price = parseInt(item.price || 0);
       }
-      
+
       total += price;
 
       li.innerHTML = `
@@ -156,7 +156,7 @@ const CartManager = {
       `;
       list.appendChild(li);
     });
-    
+
     if (totalDisplay) totalDisplay.textContent = `Tsh ${total}`;
   },
 
@@ -175,13 +175,14 @@ const CartManager = {
     list.innerHTML = "";
     let total = 0;
 
-    this.items.forEach(item => {
+    this.items.forEach((item) => {
       const li = document.createElement("li");
       li.className = "order-item";
-      
-      const price = (typeof item === 'object' && item.price) ? parseInt(item.price) : 0;
-      const name = (typeof item === 'object') ? item.name : item;
-      
+
+      const price =
+        typeof item === "object" && item.price ? parseInt(item.price) : 0;
+      const name = typeof item === "object" ? item.name : item;
+
       li.innerHTML = `<span>${name}</span> <span>Tsh ${price}</span>`;
       list.appendChild(li);
       total += price;
@@ -195,7 +196,7 @@ const CartManager = {
     localStorage.removeItem("cart");
     this.loadCartDisplay();
     this.updateCartCount();
-  }
+  },
 };
 
 /* ===============================
@@ -204,13 +205,13 @@ const CartManager = {
 const FormValidator = {
   init() {
     const forms = document.querySelectorAll("form");
-    forms.forEach(form => {
+    forms.forEach((form) => {
       // Validate on Submit
-      form.addEventListener("submit", async e => {
+      form.addEventListener("submit", async (e) => {
         let isValid = true;
         const inputs = form.querySelectorAll("input");
-        
-        inputs.forEach(input => {
+
+        inputs.forEach((input) => {
           if (!this.validateInput(input)) {
             isValid = false;
           }
@@ -225,7 +226,7 @@ const FormValidator = {
       });
 
       // Real-time Validation
-      form.querySelectorAll("input").forEach(input => {
+      form.querySelectorAll("input").forEach((input) => {
         input.addEventListener("blur", () => this.validateInput(input));
         input.addEventListener("input", () => {
           // Clear error immediately when user starts typing
@@ -240,71 +241,82 @@ const FormValidator = {
   async handleFormSubmit(form) {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-    
-    let url = '';
-    let redirect = '';
+
+    let url = "";
+    let redirect = "";
 
     // Determine endpoint based on Form ID
-    if (form.id === 'loginForm') {
-      url = 'API/login.php';
-      redirect = 'index.html';
-    } else if (form.id === 'registerForm') {
-      url = 'API/register.php';
-      redirect = 'login.html';
-    } else if (form.id === 'checkoutForm') {
-      url = 'API/checkout.php';
+    if (form.id === "loginForm") {
+      url = "login.php";
+      redirect = "index.html";
+    } else if (form.id === "registerForm") {
+      url = "register.php";
+      redirect = "login.html";
+    } else if (form.id === "checkoutForm") {
+      url = "checkout.php";
       data.items = CartManager.items; // Attach cart items
-      data.total = CartManager.items.reduce((sum, item) => sum + (parseInt(item.price)||0), 0);
-      redirect = 'order-confirmation.html';
-    } else if (form.id === 'contactForm') {
-      url = 'API/contact.php';
+      data.total = CartManager.items.reduce(
+        (sum, item) => sum + (parseInt(item.price) || 0),
+        0,
+      );
+      redirect = "order-confirmation.html";
+    } else if (form.id === "contactForm") {
+      url = "contact.php";
     }
+    console.log("Attempting to call URL:", url); // Add this for debugging
+    console.log("Data being sent:", data); // Add this for debugging
 
     if (!url) return;
 
     try {
       const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
-      
+      console.log("Response status:", response.status);
+
       const result = await response.json();
-      
+      console.log("Server response:", result);
+
       if (result.success) {
-        if (form.id === 'loginForm') AuthManager.login();
-        if (form.id === 'checkoutForm') CartManager.clear();
-        if (form.id === 'contactForm') { alert('Message sent!'); form.reset(); }
-        else if (redirect) window.location.href = redirect;
+        if (form.id === "loginForm") AuthManager.login();
+        if (form.id === "checkoutForm") CartManager.clear();
+        if (form.id === "contactForm") {
+          alert("Message sent!");
+          form.reset();
+        } else if (redirect) window.location.href = redirect;
       } else {
-        alert(result.message || 'An error occurred');
+        alert(result.message || "An error occurred");
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to connect to server. Ensure you are running on XAMPP/WAMP.');
+      console.error("Error:", error);
+      alert(
+        "Failed to connect to server. Ensure you are running on XAMPP/WAMP.",
+      );
     }
   },
 
   showError(input, msg) {
     input.classList.add("input-error");
     input.classList.remove("input-success");
-    const group = input.closest('.input-group');
-    const errorEl = group ? group.querySelector('.error-msg') : null;
+    const group = input.closest(".input-group");
+    const errorEl = group ? group.querySelector(".error-msg") : null;
     if (errorEl) errorEl.textContent = msg;
   },
 
   showSuccess(input) {
     input.classList.remove("input-error");
     input.classList.add("input-success");
-    const group = input.closest('.input-group');
-    const errorEl = group ? group.querySelector('.error-msg') : null;
+    const group = input.closest(".input-group");
+    const errorEl = group ? group.querySelector(".error-msg") : null;
     if (errorEl) errorEl.textContent = "";
   },
 
   validateInput(input) {
     const value = input.value.trim();
     const isRequired = input.hasAttribute("required");
-    
+
     // 1. Check Required
     if (value === "") {
       if (isRequired) {
@@ -333,7 +345,7 @@ const FormValidator = {
 
     this.showSuccess(input);
     return true;
-  }
+  },
 };
 
 /* ===============================
@@ -343,7 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
   CartManager.init();
   FormValidator.init();
   AuthManager.updateNavigation();
-  
+
   // If we are on the cart page, load the items
   if (document.getElementById("cartItems")) {
     CartManager.loadCartDisplay();
@@ -361,13 +373,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadMenu() {
   try {
-    const response = await fetch('API/products.php');
+    const response = await fetch("api/products.php");
     const products = await response.json();
-    const container = document.getElementById('menuContainer');
-    
-    container.innerHTML = products.map(p => `
+    const container = document.getElementById("menuContainer");
+
+    container.innerHTML = products
+      .map(
+        (p) => `
       <article class="product-card">
-        <img src="${p.image_url || 'https://via.placeholder.com/500'}" alt="${p.name}" class="card-img">
+        <img src="${p.image_url || "https://via.placeholder.com/500"}" alt="${p.name}" class="card-img">
         <div class="card-body">
           <h3 class="card-title">${p.name}</h3>
           <p class="card-desc">${p.description}</p>
@@ -375,8 +389,10 @@ async function loadMenu() {
           <button type="button" class="btn js-add-to-cart" data-id="${p.id}" data-product="${p.name}" data-price="${p.price}">Add to Cart</button>
         </div>
       </article>
-    `).join('');
+    `,
+      )
+      .join("");
   } catch (err) {
-    console.error('Failed to load menu', err);
+    console.error("Failed to load menu", err);
   }
 }

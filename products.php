@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-require '../EPOL-CAFTERIA/API/db_connect.php';
+require '../EPOL-CAFTERIA/db_connect.php';
 
 try {
     $stmt = $pdo->query("SELECT * FROM products");

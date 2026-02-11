@@ -1,9 +1,14 @@
 <?php
 // Database configuration
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'epol-cafteria'); // The database name from database.sql
-define('DB_USER', 'root'); // Your database username
-define('DB_PASS', ''); // Default XAMPP password is empty
+define('DB_NAME', 'epol-cafteria');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+
+// Basic sanitization function (MOVE THIS BEFORE PDO CONNECTION)
+function sanitize($data) {
+    return htmlspecialchars(strip_tags(trim($data)));
+}
 
 $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4";
 $options = [
@@ -17,8 +22,4 @@ try {
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }
-
-// Basic sanitization function
-function sanitize($data) {
-    return htmlspecialchars(strip_tags(trim($data)));
-}
+?>
